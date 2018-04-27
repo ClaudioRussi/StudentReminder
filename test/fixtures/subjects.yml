@@ -1,11 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyText
-  name: MyString
-  author_id: 
-
-two:
-  description: MyText
-  name: MyString
-  author_id: 
+subject1:
+  description: Subject description
+  name: Subject name
+  author: user1

@@ -5,11 +5,11 @@ one:
   description: MyText
   date: 2018-04-23 13:42:01
   status: MyString
-  subject: one
+  subject: subject1
 
 two:
   name: MyString
   description: MyText
   date: 2018-04-23 13:42:01
   status: MyString
-  subject: two
+  subject: subject1
