@@ -3,4 +3,4 @@
 subject1:
   description: Subject description
   name: Subject name
-  author: user1
+  author_id: 1
