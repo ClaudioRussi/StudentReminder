@@ -24,21 +24,27 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
+    unless(is_author? @subject)
+      redirect_to :root_path
+    end
   end
 
   def update
     @subject = Subject.find(params[:id])
-    @subject.update(subject_params)
-    if(@subject.save)
-      redirect_to @subject
-    else
-      render 'edit'
+    if(is_author? @subject)
+      if(@subject.update(subject_params))
+        redirect_to @subject
+      else
+        render 'edit'
+      end
     end
+    redirect_to root_path
+
   end
 
   def destroy
     subject = Subject.find(params[:id])
-    if(current_user.id == subject.author_id)
+    if(is_author? subject)
       Subject.destroy(subject)
       redirect_to subjects_path
     end
@@ -49,5 +55,9 @@ class SubjectsController < ApplicationController
   private
   def subject_params
     params.require(:subject).permit(:description, :name)
+  end
+
+  def is_author?(subject)
+    subject.author_id == current_user.id
   end
 end
