@@ -14,6 +14,7 @@ class SubjectsController < ApplicationController
 
   def create
     @subject = Subject.new(subject_params)
+    @subject.author = current_user
     if(@subject.save)
       redirect_to @subject
     else
@@ -36,8 +37,13 @@ class SubjectsController < ApplicationController
   end
 
   def destroy
-    Subject.destroy(params[:id])
-    redirect_to :root
+    subject = Subject.find(params[:id])
+    if(current_user.id == subject.author_id)
+      Subject.destroy(subject)
+      redirect_to subjects_path
+    end
+    redirect_to root_path
+
   end
 
   private
